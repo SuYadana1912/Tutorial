@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>var, let, const - Basic Examples</title>
+</head>
+
+<body>
+    <h1>Javascript var, let, const Variables Example.</h1>
+    <script>
+        //var: functioned-scoped or globally scoped
+        var name = "Alice";
+        console.log(name); //Alice
+
+        var name = "Bob";
+        console.log(name); //Bob
+
+        let age = 25;
+        console.log(age); //25
+
+        age = 30;
+        console.log(age); //30
+
+        const country = "USA";
+        console.log(country); //USA
+
+        function testVarLetConst() {
+            if (true) {
+                var a = 10;
+                let b = 20;
+                const c = 30;
+            }
+        }
+    </script>
+</body>
+
+</html>

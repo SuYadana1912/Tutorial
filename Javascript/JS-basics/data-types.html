@@ -1,0 +1,70 @@
+<!DOCTYPE html>>
+<html>
+
+<head>
+    <title>Data Types Examples</title>
+</head>
+
+<body>
+    <h1>Javascript Data Types: String, Number, Boolean, Undefined, Null, Object, Array Example</h1>
+
+    <script>
+        /* String Represents a sequence of characters (text). */
+        let name = "Alice";
+        let greeting = "Hello, world!";
+
+        /* Number Represents both integers and floating-point numbers. */
+        let age = 30;
+        let price = 19.99;
+
+        /* Bollean Represents a logical value: true or false. */
+        let isLoggedIn = true;
+        let isAdmin = false;
+
+        /* Undefined 
+        A variable that has been declared but not assigned a value. */
+        let score;
+        console.log(score); //undefined
+
+        /* Null Represents the intentional absence of any object value. */
+        let selectedUsesr = null;
+
+        let user = {
+            name: "Alice",
+            age: 25,
+            isMember: true,
+        }
+
+        console.log(typeof name); // "string"
+        console.log(typeof age); // "number"
+        console.log(typeof isLoggedIn); // "boolean"
+        console.log(typeof score); // "undefined"
+        console.log(typeof selsctedUser); // "object"
+        console.log(typeof user); // "object"
+
+        let numbers = [1, 2, 3, 4, 5];
+
+        let fruits = ["apple", "banana", "cherry"];
+
+        let mixed = [42, "hello", tue, null, undefined, { name: "Alice" }];
+
+        let matrix = [
+            [1, 2],
+            [3, 4],
+        ];
+
+        console.log(fruits[0]);
+        console.log(mixed[5].name);
+        fruits.push("orange"); // adds "orange" at the end
+        fruits.pop(); // remove last element
+        fruits.unshift("grape"); // adds "grape" at the begining
+        fruits.shift(); // remove first element
+
+        console.log(fruits.length);
+        console.log(Array.isArray(fruits));
+        console.log(typeof fruits);
+
+    </script>
+</body>
+
+</html>

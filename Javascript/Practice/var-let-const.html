@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Var, Let and Const - Examples</title>
+</head>
+
+<body>
+    <h1>Javascript Var, Let, Const Variable Examples</h1>
+    <script>
+        var name = "Alice";
+        console.log(name); //Alice
+
+        var name = "Bob"
+        console.log(name); //Bob
+
+        let age = "25";
+        console.log(age); //25
+
+        age = "30";
+        console.log(age); //30
+
+        const country = "USA";
+        console.log(country); //USA
+
+        function testVarLetConst() {
+            if (true) {
+                var a = 10;
+                let b = 20;
+                const c = 30;
+                console.log("b result", b);
+            }
+            console.log(a);
+        }
+        testVarLetConst();
+
+        console.log("age2", age2);
+        var age2 = 30;
+        console.log("age2 second line", age2);
+
+    </script>
+</body>
+
+</html>
