@@ -1,16 +1,20 @@
- import {AppRouterCacheProvider} from "@mui/material-nextjs/v13-appRouter";
- import StyledRoot from "./StyledRoot";
+"use client";
 
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+import StyledRoot from "./StyledRoot";
+import DrawerNav from "@/components/NavLayout/DrawerNav";
 
- export default function RootLayout({ children }) {
-   return (
+export default function RootLayout({ children }) {
+  return (
     <html lang="en">
       <body>
         <AppRouterCacheProvider>
-          <StyledRoot>{children}</StyledRoot>
-          </AppRouterCacheProvider>
-         </body>
+          <StyledRoot>
+            <DrawerNav />
+            {children}
+          </StyledRoot>
+        </AppRouterCacheProvider>
+      </body>
     </html>
   );
 }
-
