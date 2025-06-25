@@ -1,5 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+import StyledRoot from "./StyledRoot";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

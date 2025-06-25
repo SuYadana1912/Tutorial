@@ -1,28 +1,38 @@
 import { NextResponse } from "next/server";
 import * as yup from "yup";
+import { prisma, Prisma } from "@/lib/prisma";
 
 //Validation Schema to validate client request.
 const schema = yup.object().shape({
   title: yup.string().required("Title is required"),
   author: yup.string().required("Author is required"),
-  published_year: yup.number().required("Published_year is required"),
-  language: yup.string().required("Language is required"),
-  pages: yup.number().required("Pages is required"),
+  published_year: yup
+    .number()
+    .nullable()
+    .required("Published_year is required"),
 });
 
-export async function PUT(req, {params}) {
-    try {
-    const bookID = params.id;
+// Update Book API
+export async function PUT(req, { params }) {
+  try {
+    const bookID = parseInt(params.id);
     const body = await req.json();
+    const validatedData = await schema.validate(body, {
+      abortEarly: false,
+      stripUnknown: true,
+    });
 
-    await schema.validate(body, {abortEarly: false});
+    await prisma.book.update({
+      where: { id: bookID },
+      data: validatedData,
+    });
 
     return NextResponse.json({
-        message: "Book is successfully updated.",
-        bookID,
-        bodyData: body,
+      message: "Book is successfully updated.",
+      bookID,
+      bodyData: body,
     });
-} catch (error) {
+  } catch (error) {
     if (error.name === "ValidationError") {
       return NextResponse.json(
         {
@@ -34,35 +44,47 @@ export async function PUT(req, {params}) {
         },
         { status: 400 }
       );
-      }
-
-      return NextResponse.json (
-        {
-          message: "Unexpected error",
-          error: error.message,
-        },
-        {status: 500}
-      );
     }
-  }
 
-export async function DELETE(req, {params}) {
-    const bookID = params.id;
-    return NextResponse.json({
-        message: "Book is successfully deleted.",
-        bookID,
-    });
+    return NextResponse.json(
+      {
+        message: "Unexpected error",
+        error: error.message,
+      },
+      { status: 500 }
+    );
+  }
 }
 
-export async function GET(req, {params}) {
-    const bookID = params.id;
-    const book = {
-        id: bookID,
-        title: "Spare",
-        author: "Prince Harry",
-        published_year: 2023,
-        language: "English",
-        pages: 416,
-    };
-    return NextResponse.json(book);
+//Delete Book API
+export async function DELETE(req, { params }) {
+  try {
+    const bookID = parseInt(params.id);
+    await prisma.book.delete({
+      where: { id: bookID },
+    });
+    return NextResponse.json({
+      message: "Book is successfully deleted.",
+      bookID,
+    });
+  } catch (error) {
+    return NextResponse.json(
+      {
+        message: "Book not found or book deletion fails.",
+      },
+      { status: 404 }
+    );
+  }
+}
+
+// Get Book Detail API
+export async function GET(req, { params }) {
+  const bookID = parseInt(params.id);
+  const book = await prisma.book.findUnique({
+    where: {
+      id: bookID,
+    },
+  });
+
+  return NextResponse.json(book);
 }
